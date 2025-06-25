@@ -6,13 +6,10 @@ import Demo.Data._
 
 class LoginTest extends Simulation {
 
-  // 1 Http Conf
   val httpConf = http.baseUrl(url)
     .acceptHeader("application/json")
-    //Verificar de forma general para todas las solicitudes
     .check(status.is(200))
 
-  // 2 Scenario Definition
   val scn = scenario("Login").
     exec(http("login")
       .post(s"/users/login")
@@ -22,7 +19,6 @@ class LoginTest extends Simulation {
           "password": "${password}"
         }"""
       )).asJson
-      //Recibir información de la cuenta
       .check(status.is(200))
       .check(jsonPath("$.token").notNull)
     )
@@ -32,5 +28,5 @@ class LoginTest extends Simulation {
   ).protocols(httpConf)
     .assertions(
       global.responseTime.percentile(95).lt(5000)
-    );
+    );
 }
