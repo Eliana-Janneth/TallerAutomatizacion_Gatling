@@ -16,8 +16,8 @@ class LoginTest extends Simulation {
       .post("/users/login")
       .body(StringBody(
         """{
-          "email": "${email}",
-          "password": "${password}"
+          "email": "$email",
+          "password": "$password"
         }"""
       )).asJson
       .check(status.is(200))
