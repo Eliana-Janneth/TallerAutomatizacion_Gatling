@@ -13,7 +13,7 @@ class LoginTest extends Simulation {
 
   val scn = scenario("Login").
     exec(http("login")
-      .post(s"/users/login")
+      .post("/users/login")
       .body(StringBody(
         """{
           "email": "${email}",
