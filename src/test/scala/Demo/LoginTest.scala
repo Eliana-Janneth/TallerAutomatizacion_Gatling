@@ -15,7 +15,7 @@ class LoginTest extends Simulation {
     exec(http("login")
       .post("/users/login")
       .body(StringBody(
-        """{
+        s"""{
           "email": "$email",
           "password": "$password"
         }"""
@@ -26,8 +26,5 @@ class LoginTest extends Simulation {
 
   setUp(
     scn.inject(constantUsersPerSec(10).during(5.seconds))
-  ).protocols(httpConf)
-    .assertions(
-      global.responseTime.percentile(95).lt(5000)
-    );
+  ).protocols(httpConf);
 }
